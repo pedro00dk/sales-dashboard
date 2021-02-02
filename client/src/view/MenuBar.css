@@ -1,3 +1,24 @@
 .menu-bar {
-    color: green;
+    display: flex;
+    flex-direction: column;
+    width: 12em;
+    border-right: 2px solid gray;
+}
+
+.menu-bar-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2em;
+    padding: 1em;
+    border-bottom: 2px solid gray;
+    cursor: pointer;
+}
+
+.menu-bar-item:hover {
+    background-color: lightgray;
+}
+
+.menu-bar-item-selected {
+    background-color: lightgray;
 }
