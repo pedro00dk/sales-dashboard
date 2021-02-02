@@ -1,0 +1,22 @@
+.user-list {
+    position: absolute;
+    display: flex;
+    overflow-y: auto;
+}
+
+.user-list-items {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 2em;
+    padding-left: 5em;
+    padding-right: 5em;
+}
+
+.user-list-item {
+    display: flex;
+    border: 2px solid gray;
+    padding: 1em;
+    margin: 1em;
+    cursor: pointer;
+}
