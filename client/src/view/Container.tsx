@@ -1,7 +1,5 @@
 import * as React from 'react'
 import './Container.css'
-import { Footer } from './Footer'
-import { Header } from './Header'
 import { MenuBar } from './MenuBar'
 
 export const Container = () => {
@@ -18,3 +16,7 @@ export const Container = () => {
         </div>
     )
 }
+
+const Header = () => <div className='container-header'>{'HEADER'}</div>
+
+const Footer = () => <div className='container-footer'>{'FOOTER'}</div>
