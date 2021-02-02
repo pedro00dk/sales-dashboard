@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as ReactDom from 'react-dom'
-// import 'regenerator-runtime/runtime'
+import { Home } from './view/Home'
 
 const root$ = document.getElementById('root')
-ReactDom.render(<div>{'hello world!'}</div>, root$)
+ReactDom.render(<Home />, root$)
