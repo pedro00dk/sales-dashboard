@@ -1,0 +1,17 @@
+.home-menu {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.home-menu-users {
+    display: flex;
+    border-bottom: 2px solid gray;
+    flex-grow: 1;
+}
+
+.home-menu-stats {
+    display: flex;
+    padding: 2em;
+    justify-content: space-evenly;
+}

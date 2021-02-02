@@ -1,16 +1,21 @@
 import * as React from 'react'
 import './Container.css'
+import { HomeMenu } from './menu/HomeMenu'
 import { MenuBar } from './MenuBar'
 
+const menuComponents = { HOME: HomeMenu, 'USER LIST': HomeMenu }
+const menuNames = Object.keys(menuComponents)
+
 export const Container = () => {
-    const menus = ['HOME', 'USER LIST']
-    const [selectedMenu, setSelectedMenu] = React.useState(menus[0])
+    const [selectedMenu, setSelectedMenu] = React.useState(menuNames[0])
+    const MenuComponent = menuComponents[selectedMenu]
 
     return (
         <div className='container'>
             <Header />
             <div className='container-content'>
-                <MenuBar menus={menus} selected={selectedMenu} onClick={setSelectedMenu} />
+                <MenuBar menus={menuNames} selected={selectedMenu} onClick={setSelectedMenu} />
+                <MenuComponent />
             </div>
             <Footer />
         </div>
