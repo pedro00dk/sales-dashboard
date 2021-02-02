@@ -1,17 +1,17 @@
 import * as React from 'react'
+import './Container.css'
 import { Footer } from './Footer'
 import { Header } from './Header'
-import './Home.css'
 import { MenuBar } from './MenuBar'
 
-export const Home = () => {
+export const Container = () => {
     const menus = ['HOME', 'USER LIST']
     const [selectedMenu, setSelectedMenu] = React.useState(menus[0])
 
     return (
-        <div className='home'>
+        <div className='container'>
             <Header />
-            <div className='home-content'>
+            <div className='container-content'>
                 <MenuBar menus={menus} selected={selectedMenu} onClick={setSelectedMenu} />
             </div>
             <Footer />

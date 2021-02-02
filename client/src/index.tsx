@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as ReactDom from 'react-dom'
-import { Home } from './view/Home'
+import { Container } from './view/Container'
 
 const root$ = document.getElementById('root')
-ReactDom.render(<Home />, root$)
+ReactDom.render(<Container />, root$)
