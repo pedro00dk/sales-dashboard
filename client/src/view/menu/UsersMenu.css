@@ -1,0 +1,4 @@
+.users-menu {
+    display: flex;
+    flex-grow: 1;
+}

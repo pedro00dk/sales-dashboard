@@ -1,9 +1,10 @@
 import * as React from 'react'
 import './Container.css'
 import { HomeMenu } from './menu/HomeMenu'
+import { UsersMenu } from './menu/UsersMenu'
 import { MenuBar } from './MenuBar'
 
-const menuComponents = { HOME: HomeMenu, 'USER LIST': HomeMenu }
+const menuComponents = { HOME: HomeMenu, 'USER LIST': UsersMenu }
 const menuNames = Object.keys(menuComponents)
 
 export const Container = () => {
