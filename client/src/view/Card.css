@@ -1,0 +1,18 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border: 2px solid darkgray;
+    width: 8em;
+    height: 8em;
+    padding: 2em;
+}
+
+.card-title {
+    flex-grow: 1;
+}
+
+.card-content {
+    font-size: 1.5em;
+    text-align: center;
+}
