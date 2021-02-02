@@ -1,0 +1,25 @@
+{
+    "name": "sales-dashboard-client",
+    "version": "1.0.0",
+    "description": "client application of the sales dashboard",
+    "author": {
+        "name": "Pedro Henrique",
+        "email": "pedro00dk@gmail.com"
+    },
+    "license": "ISC",
+    "main": "src/index.tsx",
+    "devDependencies": {
+        "@types/react": "17.0.0",
+        "@types/react-dom": "17.0.0",
+        "parcel": "1.12.4",
+        "typescript": "latest"
+    },
+    "dependencies": {
+        "react": "17.0.1",
+        "react-dom": "17.0.1"
+    },
+    "scripts": {
+        "build": "parcel build --no-source-maps --detailed-report --public-url ./ --out-dir dist/build public/index.html",
+        "serve": "parcel serve --port 8000 public/index.html"
+    }
+}
