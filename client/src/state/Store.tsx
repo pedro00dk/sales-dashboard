@@ -1,8 +1,9 @@
 import * as React from 'react'
 import { actions as menuActions, reducer as menuReducer } from './menu'
+import { actions as userActions, reducer as userReducer } from './user'
 
 /**
- * Store implementation using flow principles for the React Hooks API.
+ * Store implementation using flux/redux principles for the React Hooks API.
  */
 export type SubReducer = (state: any, action: { type?: string; payload?: any; error?: any }) => any
 export type SubReducers = { [name: string]: SubReducer }
@@ -121,10 +122,12 @@ export const Store = <T extends SubReducers>(props: {
 
 export const actions = {
     menu: menuActions,
+    user: userActions,
 }
 
 export const reducers = {
     menu: menuReducer,
+    user: userReducer,
 }
 
 type Reducers = typeof reducers
