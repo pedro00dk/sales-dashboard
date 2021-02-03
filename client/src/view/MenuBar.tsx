@@ -1,21 +1,35 @@
 import * as React from 'react'
+import { actions, useDispatch } from '../state/Store'
 import './MenuBar.css'
 
-export const MenuBar = (props: { menus: string[]; selected: string; onClick: (menu: string) => void }) => {
+/**
+ * Lateral menu bar that display a list of menu names.
+ *
+ * @param props.menus menu names to be displayed
+ * @param props.selected name of the selected menu
+ */
+export const MenuBar = (props: { menus: string[]; selected: string }) => {
+    const dispatch = useDispatch()
+
     return (
         <div className='menu-bar'>
-            {props.menus.map(name => (
-                <Item key={name} name={name} selected={name === props.selected} onClick={props.onClick} />
+            {props.menus.map(menu => (
+                <Item
+                    key={menu}
+                    menu={menu}
+                    selected={menu === props.selected}
+                    onClick={menu => dispatch(actions.menu.set(menu))}
+                />
             ))}
         </div>
     )
 }
 
-const Item = (props: { name: string; selected: boolean; onClick: (menu: string) => void }) => (
+const Item = (props: { menu: string; selected: boolean; onClick: (menu: string) => void }) => (
     <div
         className={`menu-bar-item ${props.selected ? 'menu-bar-item-selected' : ''}`}
-        onClick={event => props.onClick(props.name)}
+        onClick={event => props.onClick(props.menu)}
     >
-        {props.name}
+        {props.menu}
     </div>
 )
