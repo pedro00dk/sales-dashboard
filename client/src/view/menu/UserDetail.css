@@ -8,25 +8,33 @@
     line-height: 2.5em;
 }
 
-.user-detail-sales {
+.user-detail--sales {
     font-size: 2em;
     margin-top: 1em;
     margin-bottom: 0.5em;
 }
 
-.user-detail-table {
+.user-detail--scroll {
+    position: absolute;
+    display: flex;
+    overflow-y: auto;
+    width: 0; /* dynamically set in code */
+    height: 0; /* dynamically set in code */
+}
+
+.user-detail--table {
     border: 1px solid black;
     border-collapse: collapse;
     width: 100%;
 }
 
-.user-detail-table > thead > tr > th {
+.user-detail--table > thead > tr > th {
     border: 1px solid black;
     text-align: center;
     width: 25%;
 }
 
-.user-detail-table > tbody > tr > td {
+.user-detail--table > tbody > tr > td {
     border: 1px solid black;
     text-align: center;
     width: 25%;

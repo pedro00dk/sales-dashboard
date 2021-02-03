@@ -1,100 +1,20 @@
 import * as React from 'react'
-import { User } from '../../state/types/User'
+import { useSelection } from '../../state/Store'
+import { currencyFormatterSymbol, dateFormatter } from '../../util'
 import './UserDetail.css'
-
-const user: User = {
-    name: 'Pedro',
-    username: 'phsm',
-    phone: '(81) 99508-8741',
-    totalSales: 1234,
-    sales: [
-        {
-            product: 'French Fries',
-            date: new Date(),
-            unitValue: 5.45,
-            volume: 10000,
-        },
-        {
-            product: 'French Fries',
-            date: new Date(),
-            unitValue: 5.45,
-            volume: 10000,
-        },
-        {
-            product: 'French Fries',
-            date: new Date(),
-            unitValue: 5.45,
-            volume: 10000,
-        },
-        {
-            product: 'French Fries',
-            date: new Date(),
-            unitValue: 5.45,
-            volume: 10000,
-        },
-        {
-            product: 'French Fries',
-            date: new Date(),
-            unitValue: 5.45,
-            volume: 10000,
-        },
-        {
-            product: 'French Fries',
-            date: new Date(),
-            unitValue: 5.45,
-            volume: 10000,
-        },
-        {
-            product: 'French Fries',
-            date: new Date(),
-            unitValue: 5.45,
-            volume: 10000,
-        },
-        {
-            product: 'French Fries',
-            date: new Date(),
-            unitValue: 123123125.45,
-            volume: 10000,
-        },
-        {
-            product: 'French Fries',
-            date: new Date(),
-            unitValue: 5.45,
-            volume: 10000,
-        },
-        {
-            product: 'French Fries',
-            date: new Date(),
-            unitValue: 5.45,
-            volume: 10000,
-        },
-        {
-            product: 'French Fries',
-            date: new Date(),
-            unitValue: 5.45,
-            volume: 10000,
-        },
-        {
-            product: 'French Fries',
-            date: new Date(),
-            unitValue: 5.45,
-            volume: 10000,
-        },
-    ],
-}
 
 export const UserDetail = () => {
     const tableContainer$ = React.useRef<HTMLDivElement>()
-    const currencyFormatter = new Intl.NumberFormat('en', { style: 'currency', currency: 'USD' })
-    const dateFormatter = new Intl.DateTimeFormat('en', { day: '2-digit', month: 'short', year: 'numeric' })
+    const { selectedUser } = useSelection(state => ({ selectedUser: state.user.selectedUser }))
+    if (selectedUser == undefined) throw new Error('no user is selected in the user reducer')
 
     React.useLayoutEffect(() => {
         const onResize = () => {
-            const element$ = tableContainer$.current
-            const parent$ = element$.parentElement
-            if (element$.clientWidth === parent$.clientWidth && element$.clientHeight === parent$.clientHeight) return
-            element$.style.width = `${parent$.clientWidth}px`
-            element$.style.height = `${parent$.clientHeight}px`
+            const base$ = tableContainer$.current
+            const child$ = base$.firstChild as HTMLDivElement
+            if (base$.clientWidth === child$.clientWidth && base$.clientHeight === child$.clientHeight) return
+            child$.style.width = `${base$.clientWidth}px`
+            child$.style.height = `${base$.clientHeight}px`
         }
         onResize()
         addEventListener('resize', onResize)
@@ -103,14 +23,14 @@ export const UserDetail = () => {
 
     return (
         <div className='user-detail'>
-            <span>{`Name: ${user.name}`}</span>
-            <span>{`User Name: ${user.username}`}</span>
-            <span>{`Phone: ${user.phone}`}</span>
-            <span>{`Sales: ${user.totalSales}`}</span>
-            <span className='user-detail-sales'>{'Sales'}</span>
-            <div style={{ flexGrow: 1 }}>
-                <div ref={tableContainer$} style={{ position: 'absolute', overflowY: 'auto' }}>
-                    <table className='user-detail-table'>
+            <span>{`Name: ${selectedUser.name}`}</span>
+            <span>{`User Name: ${selectedUser.username}`}</span>
+            <span>{`Phone: ${selectedUser.phone}`}</span>
+            <span>{`Total Sales: ${currencyFormatterSymbol.format(selectedUser.totalSales)}`}</span>
+            <span className='user-detail--sales'>{'Sales'}</span>
+            <div ref={tableContainer$} style={{ flex: 1 }}>
+                <div className='user-detail--scroll'>
+                    <table className='user-detail--table'>
                         <thead>
                             <tr>
                                 <th>{'Product'}</th>
@@ -120,11 +40,11 @@ export const UserDetail = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {user.sales.map(sale => (
+                            {selectedUser.sales.map(sale => (
                                 <tr>
                                     <td>{sale.product}</td>
                                     <td>{sale.volume}</td>
-                                    <td>{currencyFormatter.format(sale.unitValue)}</td>
+                                    <td>{currencyFormatterSymbol.format(sale.unitValue)}</td>
                                     <td>{dateFormatter.format(sale.date)}</td>
                                 </tr>
                             ))}

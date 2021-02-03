@@ -1,60 +1,29 @@
 import * as React from 'react'
-import { actions, useDispatch } from '../../state/Store'
-import { User } from '../../state/types/User'
+import { actions, useDispatch, useSelection } from '../../state/Store'
+import { currencyFormatterCode, numberFormatterComma } from '../../util'
 import { Card } from '../Card'
 import { UserList } from '../user/UserList'
 import './HomeMenu.css'
 
-const users: User[] = [
-    {
-        name: 'Pedro',
-        username: 'phsm',
-        phone: '(81) 99508-8741',
-        totalSales: 1234,
-        sales: [],
-    },
-    {
-        name: 'Guilherme',
-        username: 'ghps',
-        phone: '(81) 99999-9999',
-        totalSales: 4321,
-        sales: [],
-    },
-    {
-        name: 'Pedro',
-        username: 'phsm',
-        phone: '(81) 99508-8741',
-        totalSales: 1234,
-        sales: [],
-    },
-    {
-        name: 'Guilherme',
-        username: 'ghps',
-        phone: '(81) 99999-9999',
-        totalSales: 4321,
-        sales: [],
-    },
-    {
-        name: 'Pedro',
-        username: 'phsm',
-        phone: '(81) 99508-8741',
-        totalSales: 1234,
-        sales: [],
-    },
-]
-
 export const HomeMenu = () => {
     const dispatch = useDispatch()
+    const { stats, user } = useSelection(state => ({ stats: state.stats, user: state.user }))
 
     return (
         <div className='home-menu'>
             <div className='home-menu-users'>
-                <UserList users={users} onClick={username => dispatch(actions.menu.set('USER DETAIL'))} />
+                <UserList
+                    users={user.topSellers}
+                    onClick={user => {
+                        dispatch(actions.user.select(user))
+                        dispatch(actions.menu.set('USER DETAIL'))
+                    }}
+                />
             </div>
             <div className='home-menu-stats'>
-                <Card title={'Total Sales'} content={'USD 1,239.00'} />
-                <Card title={'Total Products'} content={'43,212'} />
-                <Card title={'Total Users'} content={'61'} />
+                <Card title={'Total Sales'} content={currencyFormatterCode.format(stats.totalSold)} />
+                <Card title={'Total Products'} content={numberFormatterComma.format(stats.totalProducts)} />
+                <Card title={'Total Users'} content={numberFormatterComma.format(stats.totalUsers)} />
             </div>
         </div>
     )

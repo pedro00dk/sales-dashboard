@@ -1,171 +1,22 @@
 import * as React from 'react'
-import { actions, useDispatch } from '../../state/Store'
-import { User } from '../../state/types/User'
+import { actions, useDispatch, useSelection } from '../../state/Store'
 import { UserList } from '../user/UserList'
-import './UsersMenu.css'
 
-const users: User[] = [
-    {
-        name: 'Pedro',
-        username: 'phsm',
-        phone: '(81) 99508-8741',
-        totalSales: 1234,
-        sales: [],
-    },
-    {
-        name: 'Guilherme',
-        username: 'ghps',
-        phone: '(81) 99999-9999',
-        totalSales: 4321,
-        sales: [],
-    },
-    {
-        name: 'Pedro',
-        username: 'phsm',
-        phone: '(81) 99508-8741',
-        totalSales: 1234,
-        sales: [],
-    },
-    {
-        name: 'Guilherme',
-        username: 'ghps',
-        phone: '(81) 99999-9999',
-        totalSales: 4321,
-        sales: [],
-    },
-    {
-        name: 'Pedro',
-        username: 'phsm',
-        phone: '(81) 99508-8741',
-        totalSales: 1234,
-        sales: [],
-    },
-    {
-        name: 'Guilherme',
-        username: 'ghps',
-        phone: '(81) 99999-9999',
-        totalSales: 4321,
-        sales: [],
-    },
-    {
-        name: 'Pedro',
-        username: 'phsm',
-        phone: '(81) 99508-8741',
-        totalSales: 1234,
-        sales: [],
-    },
-    {
-        name: 'Guilherme',
-        username: 'ghps',
-        phone: '(81) 99999-9999',
-        totalSales: 4321,
-        sales: [],
-    },
-    {
-        name: 'Pedro',
-        username: 'phsm',
-        phone: '(81) 99508-8741',
-        totalSales: 1234,
-        sales: [],
-    },
-    {
-        name: 'Guilherme',
-        username: 'ghps',
-        phone: '(81) 99999-9999',
-        totalSales: 4321,
-        sales: [],
-    },
-    {
-        name: 'Pedro',
-        username: 'phsm',
-        phone: '(81) 99508-8741',
-        totalSales: 1234,
-        sales: [],
-    },
-    {
-        name: 'Guilherme',
-        username: 'ghps',
-        phone: '(81) 99999-9999',
-        totalSales: 4321,
-        sales: [],
-    },
-    {
-        name: 'Pedro',
-        username: 'phsm',
-        phone: '(81) 99508-8741',
-        totalSales: 1234,
-        sales: [],
-    },
-    {
-        name: 'Guilherme',
-        username: 'ghps',
-        phone: '(81) 99999-9999',
-        totalSales: 4321,
-        sales: [],
-    },
-    {
-        name: 'Pedro',
-        username: 'phsm',
-        phone: '(81) 99508-8741',
-        totalSales: 1234,
-        sales: [],
-    },
-    {
-        name: 'Guilherme',
-        username: 'ghps',
-        phone: '(81) 99999-9999',
-        totalSales: 4321,
-        sales: [],
-    },
-    {
-        name: 'Pedro',
-        username: 'phsm',
-        phone: '(81) 99508-8741',
-        totalSales: 1234,
-        sales: [],
-    },
-    {
-        name: 'Guilherme',
-        username: 'ghps',
-        phone: '(81) 99999-9999',
-        totalSales: 4321,
-        sales: [],
-    },
-    {
-        name: 'Pedro',
-        username: 'phsm',
-        phone: '(81) 99508-8741',
-        totalSales: 1234,
-        sales: [],
-    },
-    {
-        name: 'Guilherme',
-        username: 'ghps',
-        phone: '(81) 99999-9999',
-        totalSales: 4321,
-        sales: [],
-    },
-    {
-        name: 'Pedro',
-        username: 'phsm',
-        phone: '(81) 99508-8741',
-        totalSales: 1234,
-        sales: [],
-    },
-    {
-        name: 'Guilherme',
-        username: 'ghps',
-        phone: '(81) 99999-9999',
-        totalSales: 4321,
-        sales: [],
-    },
-]
-
-export const UsersMenu = (props: { setMenu: (menu: (...args: any[]) => JSX.Element) => void }) => {
+/**
+ * List all users fetched by the user reducer. If one of the users is selected, the user detail menu is displayed with
+ * selected user info.
+ */
+export const UsersMenu = () => {
     const dispatch = useDispatch()
+    const { user } = useSelection(state => ({ user: state.user }))
+
     return (
-        <div className='users-menu'>
-            <UserList users={users} onClick={username => dispatch(actions.menu.set('USER DETAIL'))} />
-        </div>
+        <UserList
+            users={Object.values(user.users)}
+            onClick={user => {
+                dispatch(actions.user.select(user))
+                dispatch(actions.menu.set('USER DETAIL'))
+            }}
+        />
     )
 }

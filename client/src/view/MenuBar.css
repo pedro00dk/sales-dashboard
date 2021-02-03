@@ -1,7 +1,7 @@
 .menu-bar {
     display: flex;
     flex-direction: column;
-    width: 12em;
+    width: 14em;
     border-right: 2px solid gray;
 }
 
