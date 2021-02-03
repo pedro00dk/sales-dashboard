@@ -1,26 +1,35 @@
 .user-list {
+    display: flex;
+    flex: 1;
+}
+
+.user-list--scroll {
     position: absolute;
     display: flex;
     overflow-y: auto;
+    width: 0; /* dynamically set in code */
+    height: 0; /* dynamically set in code */
 }
 
-.user-list-items {
+.user-list--items {
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
+    flex: 1;
     padding: 2em;
     padding-left: 5em;
     padding-right: 5em;
 }
 
-.user-list-item {
+.user-list--item {
     display: flex;
     align-items: center;
     border: 2px solid gray;
     padding: 1em;
+    padding-left: 2em;
+    padding-right: 2em;
     margin: 1em;
 }
 
-.user-list-item-clickable {
-    cursor: pointer;
+.user-list--item:hover {
+    background-color: lightgray;
 }

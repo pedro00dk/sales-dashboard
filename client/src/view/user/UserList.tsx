@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { User } from '../../state/types/User'
+import { currencyFormatterSymbol } from '../../util'
 import './UserList.css'
 
 /**
@@ -13,11 +14,11 @@ export const UserList = (props: { users: User[]; onClick?: (user: User) => void 
 
     React.useLayoutEffect(() => {
         const onResize = () => {
-            const element$ = container$.current
-            const parent$ = element$.parentElement
-            if (element$.clientWidth === parent$.clientWidth && element$.clientHeight === parent$.clientHeight) return
-            element$.style.width = `${parent$.clientWidth}px`
-            element$.style.height = `${parent$.clientHeight}px`
+            const base$ = container$.current
+            const child$ = base$.firstChild as HTMLDivElement
+            if (base$.clientWidth === child$.clientWidth && base$.clientHeight === child$.clientHeight) return
+            child$.style.width = `${base$.clientWidth}px`
+            child$.style.height = `${base$.clientHeight}px`
         }
         onResize()
         addEventListener('resize', onResize)
@@ -26,10 +27,12 @@ export const UserList = (props: { users: User[]; onClick?: (user: User) => void 
 
     return (
         <div ref={container$} className='user-list'>
-            <div className='user-list-items'>
-                {props.users.map((user, i) => (
-                    <Item key={user.username} index={i + 1} user={user} onClick={props.onClick} />
-                ))}
+            <div className='user-list--scroll'>
+                <div className='user-list--items'>
+                    {props.users.map((user, i) => (
+                        <Item key={user.username} index={i + 1} user={user} onClick={props.onClick} />
+                    ))}
+                </div>
             </div>
         </div>
     )
@@ -37,7 +40,6 @@ export const UserList = (props: { users: User[]; onClick?: (user: User) => void 
 
 /**
  * Renders a single user of the users list.
- * If `props.onClick` is provided, it changes the cursor type to pointer.
  *
  * @param props.index user index
  * @param props.user user object
@@ -45,11 +47,12 @@ export const UserList = (props: { users: User[]; onClick?: (user: User) => void 
  */
 const Item = (props: { index: number; user: User; onClick?: (user: User) => void }) => (
     <div
-        className={`user-list-item ${props.onClick != undefined ? 'user-list-item-clickable' : ''}`}
+        className='user-list--item'
+        style={{ cursor: props.onClick != undefined ? 'pointer' : '' }}
         onClick={event => props.onClick?.(props.user)}
     >
-        <span style={{ height: 'fit-content', width: '3em' }}>{props.index}</span>
-        <span style={{ height: 'fit-content', flexGrow: 1 }}>{props.user.name}</span>
-        <span style={{ fontSize: '1.25em' }}>{props.user.totalSales}</span>
+        <span style={{ width: '3em' }}>{props.index}</span>
+        <span style={{ flex: 1 }}>{props.user.name}</span>
+        <span style={{ fontSize: '1.25em' }}>{currencyFormatterSymbol.format(props.user.totalSales)}</span>
     </div>
 )
