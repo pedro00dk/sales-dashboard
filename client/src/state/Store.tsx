@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { actions as menuActions, reducer as menuReducer } from './menu'
 
 /**
  * Store implementation using flow principles for the React Hooks API.
@@ -115,3 +116,26 @@ export const Store = <T extends SubReducers>(props: {
     context: React.Context<Hooks<T>>
     children?: React.ReactNode
 }) => <props.context.Provider value={reducersToHooks(props.reducers)}>{props.children}</props.context.Provider>
+
+// Default Store containing all reducers
+
+export const actions = {
+    menu: menuActions,
+}
+
+export const reducers = {
+    menu: menuReducer,
+}
+
+type Reducers = typeof reducers
+export type DefaultState = State<Reducers>
+export type DefaultAsyncAction = AsyncAction<Reducers>
+
+const context = React.createContext<Hooks<Reducers>>(undefined)
+
+export const useGetState = () => React.useContext(context).useGetState()
+export const useDispatch = () => React.useContext(context).useDispatch()
+export const useSelection = <U extends any>(query: (state: State<Reducers>) => U) =>
+    React.useContext(context).useSelection(query)
+
+export const DefaultStore = (props: { children?: React.ReactNode }) => Store({ reducers, context, ...props })
