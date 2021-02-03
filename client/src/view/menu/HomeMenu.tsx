@@ -52,9 +52,9 @@ export const HomeMenu = () => {
                 <UserList users={users} onClick={username => dispatch(actions.menu.set('USER DETAIL'))} />
             </div>
             <div className='home-menu-stats'>
-                <Card title={'Total Sales'} content={'10000'} />
-                <Card title={'Total Products'} content={'10000'} />
-                <Card title={'Total Users asdf asdf asdf'} content={'10000'} />
+                <Card title={'Total Sales'} content={'USD 1,239.00'} />
+                <Card title={'Total Products'} content={'43,212'} />
+                <Card title={'Total Users'} content={'61'} />
             </div>
         </div>
     )

@@ -48,8 +48,8 @@ const Item = (props: { index: number; user: User; onClick?: (user: User) => void
         className={`user-list-item ${props.onClick != undefined ? 'user-list-item-clickable' : ''}`}
         onClick={event => props.onClick?.(props.user)}
     >
-        <span style={{ width: '3em' }}>{props.index}</span>
-        <span style={{ flexGrow: 1 }}>{props.user.name}</span>
-        <span>{props.user.totalSales}</span>
+        <span style={{ height: 'fit-content', width: '3em' }}>{props.index}</span>
+        <span style={{ height: 'fit-content', flexGrow: 1 }}>{props.user.name}</span>
+        <span style={{ fontSize: '1.25em' }}>{props.user.totalSales}</span>
     </div>
 )

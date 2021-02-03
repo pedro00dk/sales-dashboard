@@ -53,7 +53,7 @@ const user: User = {
         {
             product: 'French Fries',
             date: new Date(),
-            unitValue: 5.45,
+            unitValue: 123123125.45,
             volume: 10000,
         },
         {
@@ -85,6 +85,8 @@ const user: User = {
 
 export const UserDetail = () => {
     const tableContainer$ = React.useRef<HTMLDivElement>()
+    const currencyFormatter = new Intl.NumberFormat('en', { style: 'currency', currency: 'USD' })
+    const dateFormatter = new Intl.DateTimeFormat('en', { day: '2-digit', month: 'short', year: 'numeric' })
 
     React.useLayoutEffect(() => {
         const onResize = () => {
@@ -122,8 +124,8 @@ export const UserDetail = () => {
                                 <tr>
                                     <td>{sale.product}</td>
                                     <td>{sale.volume}</td>
-                                    <td>{sale.unitValue}</td>
-                                    <td>{sale.date.toString()}</td>
+                                    <td>{currencyFormatter.format(sale.unitValue)}</td>
+                                    <td>{dateFormatter.format(sale.date)}</td>
                                 </tr>
                             ))}
                         </tbody>

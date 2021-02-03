@@ -3,16 +3,18 @@
     flex-direction: column;
     justify-content: space-around;
     border: 2px solid darkgray;
-    width: 8em;
-    height: 8em;
-    padding: 2em;
+    width: 10em;
+    height: 10em;
+    padding: 1em;
 }
 
 .card-title {
+    margin-top: 0.5em;
     flex-grow: 1;
 }
 
 .card-content {
+    margin-bottom: 0.5em;
     font-size: 1.5em;
     text-align: center;
 }

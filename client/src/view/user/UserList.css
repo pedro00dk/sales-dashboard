@@ -15,6 +15,7 @@
 
 .user-list-item {
     display: flex;
+    align-items: center;
     border: 2px solid gray;
     padding: 1em;
     margin: 1em;
