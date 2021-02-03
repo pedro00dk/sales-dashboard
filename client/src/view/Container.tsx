@@ -1,6 +1,7 @@
 import * as React from 'react'
 import './Container.css'
 import { HomeMenu } from './menu/HomeMenu'
+import { UserDetail } from './menu/UserDetail'
 import { UsersMenu } from './menu/UsersMenu'
 import { MenuBar } from './MenuBar'
 
@@ -16,7 +17,8 @@ export const Container = () => {
             <Header />
             <div className='container-content'>
                 <MenuBar menus={menuNames} selected={selectedMenu} onClick={setSelectedMenu} />
-                <MenuComponent />
+                {/* <MenuComponent /> */}
+                <UserDetail />
             </div>
             <Footer />
         </div>
