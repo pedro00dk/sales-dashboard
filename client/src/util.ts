@@ -8,3 +8,4 @@ export const currencyFormatterCode = new Intl.NumberFormat('en', {
     currency: 'USD',
     currencyDisplay: 'code',
 })
+export const dateFormatter = new Intl.DateTimeFormat('en', { day: '2-digit', month: 'short', year: 'numeric' })
