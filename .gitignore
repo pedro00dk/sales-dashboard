@@ -8,3 +8,8 @@ package-lock.json
 .cache/
 .parcel-cache/
 dist/
+
+.venv/
+__pycache__
+*.py[do]
+db.sqlite3
