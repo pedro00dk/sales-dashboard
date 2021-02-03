@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { User } from '../../User'
+import { User } from '../../state/types/User'
 import './UserDetail.css'
 
 const user: User = {
@@ -83,7 +83,7 @@ const user: User = {
     ],
 }
 
-export const UserDetail = (props: { user?: User }) => {
+export const UserDetail = () => {
     const tableContainer$ = React.useRef<HTMLDivElement>()
 
     React.useLayoutEffect(() => {
