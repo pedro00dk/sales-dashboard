@@ -247,7 +247,7 @@ type Action =
 
 const initialState: State = {
     users: x,
-    topSellers: users,
+    topSellers: users.slice(0, 5),
     selectedUser: undefined,
 }
 

@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { actions as menuActions, reducer as menuReducer } from './menu'
+import { actions as statsActions, reducer as statsReducer } from './stats'
 import { actions as userActions, reducer as userReducer } from './user'
 
 /**
@@ -123,11 +124,13 @@ export const Store = <T extends SubReducers>(props: {
 export const actions = {
     menu: menuActions,
     user: userActions,
+    stats: statsActions,
 }
 
 export const reducers = {
     menu: menuReducer,
     user: userReducer,
+    stats: statsReducer,
 }
 
 type Reducers = typeof reducers
