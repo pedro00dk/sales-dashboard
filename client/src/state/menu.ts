@@ -5,8 +5,8 @@
 type State = { name: string; data: any }[]
 
 type Action =
-    | { type: 'menu/set'; payload: { name: string; data: any } }
-    | { type: 'menu/push'; payload: { name: string; data: any } }
+    | { type: 'menu/set'; payload: { name: string } }
+    | { type: 'menu/push'; payload: { name: string } }
     | { type: 'menu/pop' }
 
 const initialState: State = []
@@ -24,9 +24,9 @@ export const reducer = (state = initialState, action: Action) => {
     }
 }
 
-const set = (name: string, data: any): Action => ({ type: 'menu/set', payload: { name, data } })
+const set = (name: string): Action => ({ type: 'menu/set', payload: { name } })
 
-const push = (name: string, data: any): Action => ({ type: 'menu/push', payload: { name, data } })
+const push = (name: string): Action => ({ type: 'menu/push', payload: { name } })
 
 const pop = (): Action => ({ type: 'menu/pop' })
 
