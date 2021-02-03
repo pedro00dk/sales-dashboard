@@ -1,8 +1,14 @@
 import * as React from 'react'
-import { User } from '../../User'
+import { User } from '../../state/types/User'
 import './UserList.css'
 
-export const UserList = (props: { users: User[]; onClick?: (username: string) => void }) => {
+/**
+ * Render a list of users, displaying user names and total sales.
+ *
+ * @param props.users users to display in the received order, they must all be unique
+ * @param props.onClick optional callback that is triggered when one of the users is clicked
+ */
+export const UserList = (props: { users: User[]; onClick?: (user: User) => void }) => {
     const container$ = React.useRef<HTMLDivElement>()
 
     React.useLayoutEffect(() => {
@@ -29,8 +35,19 @@ export const UserList = (props: { users: User[]; onClick?: (username: string) =>
     )
 }
 
-const Item = (props: { index: number; user: User; onClick?: (username: string) => void }) => (
-    <div className='user-list-item' onClick={event => props.onClick?.(props.user.username)}>
+/**
+ * Renders a single user of the users list.
+ * If `props.onClick` is provided, it changes the cursor type to pointer.
+ *
+ * @param props.index user index
+ * @param props.user user object
+ * @param props.onClick optional callback that is triggered when this component is clicked
+ */
+const Item = (props: { index: number; user: User; onClick?: (user: User) => void }) => (
+    <div
+        className={`user-list-item ${props.onClick != undefined ? 'user-list-item-clickable' : ''}`}
+        onClick={event => props.onClick?.(props.user)}
+    >
         <span style={{ width: '3em' }}>{props.index}</span>
         <span style={{ flexGrow: 1 }}>{props.user.name}</span>
         <span>{props.user.totalSales}</span>

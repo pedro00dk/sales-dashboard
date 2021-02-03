@@ -18,5 +18,8 @@
     border: 2px solid gray;
     padding: 1em;
     margin: 1em;
+}
+
+.user-list-item-clickable {
     cursor: pointer;
 }
