@@ -28,4 +28,4 @@ class StatsView(views.APIView):
         total_sales = User.objects.aggregate(Sum('total_sales'))['total_sales__sum']
         total_products = Sale.objects.aggregate(Sum('volume'))['volume__sum']
         stats = { 'totalUsers': total_users, 'totalSales': total_sales, 'totalProducts': total_products }
-        return Response(data=str(stats))
+        return Response(data=stats)
