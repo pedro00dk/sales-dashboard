@@ -9,6 +9,6 @@ export type User = {
 export type Sale = {
     product: string
     volume: number
-    unitValue: number
+    unitPrice: number
     date: Date
 }
