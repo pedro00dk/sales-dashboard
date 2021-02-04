@@ -12,7 +12,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = User
-        fields = ('url', 'username', 'name', 'phone', 'totalSales')
+        fields = ('url', 'username', 'name', 'phone', 'total_sales', 'totalSales')
 
 
 class SaleSerializer(serializers.ModelSerializer):
@@ -23,4 +23,4 @@ class SaleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Sale
-        fields = ('url', 'id', 'user', 'product', 'volume', 'unitPrice', 'date')
+        fields = ('url', 'id', 'user', 'product', 'volume', 'unit_price', 'date', 'unitPrice')
