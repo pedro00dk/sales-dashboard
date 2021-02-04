@@ -11,17 +11,18 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 import os
+import sys
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+IS_HELP = '--help' in sys.argv or '--h' in sys.argv or sys.argv.index('manage.py') == len(sys.argv) - 1
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'hn*t4l(k$@!s_+d3v9v@&ls(=rtbvvxsxul^!9+53la$zr28du'
+SECRET_KEY = os.environ['SECRET_KEY'] if not IS_HELP else 'hn*t4l(k$@!s_+d3v9v@&ls(=rtbvvxsxul^!9+53la$zr28du'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -85,9 +86,9 @@ DATABASES = {
         'CONN_MAX_AGE': 60,
         'NAME': 'postgres',
         'USER': 'postgres',
-        'PASSWORD': os.environ['DATABASE_PASSWORD'],
-        'HOST': os.environ['DATABASE_HOST'],
-        'PORT': os.environ['DATABASE_PORT'],
+        'PASSWORD': os.environ['DATABASE_PASSWORD'] if not IS_HELP else '',
+        'HOST': os.environ['DATABASE_HOST'] if not IS_HELP else '',
+        'PORT': os.environ['DATABASE_PORT'] if not IS_HELP else '',
     }
 }
 
