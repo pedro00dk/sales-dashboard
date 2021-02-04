@@ -40,11 +40,11 @@ export const UserDetail = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {selectedUser.sales.map(sale => (
-                                <tr>
+                            {selectedUser.sales.map((sale, i) => (
+                                <tr key={i}>
                                     <td>{sale.product}</td>
                                     <td>{sale.volume}</td>
-                                    <td>{currencyFormatterSymbol.format(sale.unitValue)}</td>
+                                    <td>{currencyFormatterSymbol.format(sale.unitPrice)}</td>
                                     <td>{dateFormatter.format(sale.date)}</td>
                                 </tr>
                             ))}
