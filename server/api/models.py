@@ -22,6 +22,15 @@ class Sale(models.Model):
         return f'{type(self).__name__} [{self.user.username}] ({self.product}, {self.date})'
 
     def save(self, *args, **kwargs):
+        if Sale.objects.filter(pk=self.pk).exists():
+            raise Exception('sale already exists and cannot be mutated')
         self.user.total_sales += self.unit_price * self.volume
         super(Sale, self).save(*args, **kwargs)
+        self.user.save()
+    
+    def delete(self, *args, **kwargs):
+        if not Sale.objects.filter(pk=self.pk).exists():
+            raise Exception('sale does not exist')
+        self.user.total_sales -= self.unit_price * self.volume
+        super(Sale, self).delete(*args, **kwargs)
         self.user.save()
