@@ -9,11 +9,16 @@ export const HomeMenu = () => {
     const dispatch = useDispatch()
     const { stats, user } = useSelection(state => ({ stats: state.stats, user: state.user }))
 
+    React.useEffect(() => {
+        dispatch(actions.user.fetchBestSellers())
+        dispatch(actions.stats.fetchStats())
+    }, [])
+
     return (
         <div className='home-menu'>
             <div className='home-menu-users'>
                 <UserList
-                    users={user.topSellers}
+                    users={user.bestSellers}
                     onClick={user => {
                         dispatch(actions.user.select(user))
                         dispatch(actions.menu.set('USER DETAIL'))
@@ -21,9 +26,9 @@ export const HomeMenu = () => {
                 />
             </div>
             <div className='home-menu-stats'>
-                <Card title={'Total Sales'} content={currencyFormatterCode.format(stats.totalSold)} />
-                <Card title={'Total Products'} content={numberFormatterComma.format(stats.totalProducts)} />
-                <Card title={'Total Users'} content={numberFormatterComma.format(stats.totalUsers)} />
+                <Card title={'Total Sales'} content={currencyFormatterCode.format(stats.stats.totalSales)} />
+                <Card title={'Total Products'} content={numberFormatterComma.format(stats.stats.totalProducts)} />
+                <Card title={'Total Users'} content={numberFormatterComma.format(stats.stats.totalUsers)} />
             </div>
         </div>
     )

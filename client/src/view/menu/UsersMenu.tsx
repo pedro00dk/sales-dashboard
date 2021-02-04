@@ -10,6 +10,10 @@ export const UsersMenu = () => {
     const dispatch = useDispatch()
     const { user } = useSelection(state => ({ user: state.user }))
 
+    React.useEffect(() => {
+        dispatch(actions.user.fetchUsers())
+    }, [])
+
     return (
         <UserList
             users={Object.values(user.users)}
