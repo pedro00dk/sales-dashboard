@@ -49,6 +49,7 @@ const fetchBestSellers: () => DefaultAsyncAction = () => async dispatch => {
     try {
         const response = await fetch('http://localhost:8001/best_sellers/')
         const bestSellers: User[] = await response.json()
+        bestSellers.forEach(user => user.sales.forEach(sale => (sale.date = new Date(sale.date))))
         dispatch({ type: 'user/fetchBestSellers', payload: { bestSellers } })
     } catch (error) {
         dispatch({ type: 'user/fetchBestSellers', error })
@@ -60,6 +61,7 @@ const fetchUsers: () => DefaultAsyncAction = () => async dispatch => {
     try {
         const response = await fetch('http://localhost:8001/users/')
         const users: User[] = await response.json()
+        users.forEach(user => user.sales.forEach(sale => (sale.date = new Date(sale.date))))
         dispatch({ type: 'user/fetchUsers', payload: { users } })
     } catch (error) {
         dispatch({ type: 'user/fetchUsers', error })
